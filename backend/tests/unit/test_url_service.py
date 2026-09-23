@@ -4,6 +4,8 @@ from unittest.mock import Mock
 from app.services.url_service import URLService
 
 
+
+
 def test_create_short_url_generates_code_and_persists_url():
     repository = Mock()
     repository.get_by_short_code.return_value = None
@@ -22,7 +24,7 @@ def test_create_short_url_generates_code_and_persists_url():
         base_url="http://localhost:8000"
     )
     result = service.create_short_url(
-        original_url="htpps://example.com"
+        original_url="https://example.com"
     )
     
     code_generator.assert_called_once_with()
