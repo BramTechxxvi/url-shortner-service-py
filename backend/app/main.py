@@ -7,12 +7,12 @@ from sqlalchemy.orm import Session
 
 
 app = FastAPI(
-    title="URL Shorttener API",
+    title="URL Shortener API",
     description="A URL Shortener service built with FastAPI.",
     version="1.0.0",
 )
 
-app.include_router()
+# app.include_router()
 
 @app.get("/health")
 def health_check():
