@@ -18,6 +18,11 @@ SessionLocal = sessionmaker(
     autocommit=False,
 )
 
+class Base(DeclarativeBase):
+    pass
+
+
+
 def get_db()-> Generator[Session, None, None]:
     db = SessionLocal
     try:
