@@ -15,17 +15,21 @@ class URLService:
         
     
     def create_short_url(self, original_url: str) -> dict:
-        short_code = self.code_generator()
-        self.repository.get_by_short_code(short_code)
+        while True:
+            short_code = self.code_generator()
+            existing_url = self.repository.get_by_short_code(short_code)
+            
+            if existing_url is None:
+                break
+            
         saved_url = self.repository.create(
             original_url=original_url,
             short_code=short_code,
         )
+        
         return {
             "original_url": saved_url.original_url,
             "short_code": saved_url.short_code,
-            "short_url": (
-                f"{self.base_url}/{saved_url.short_code}"
-            ),
+            "short_url": f"{self.base_url}/{saved_url.short_code}",
             "created_at": saved_url.created_at,
         }
