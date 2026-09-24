@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     app_env: str= "development"
     database_url: str
     base_url: str= "http://localhost:8000"
+    test_database_url: str
     
     model_config = SettingsConfigDict(
         env_file=".env",
