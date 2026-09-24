@@ -18,3 +18,18 @@ def test_engine():
     
     Base.metadata.drop_all(bind=engine)
     engine.dispose()
+    
+    
+    
+@pytest.fixture()
+def db_session(test_engine):
+    TestingSessionLocal = Sessionmaker(
+        bind=test_engine,
+        autoflush=False,
+        autocommit=False,
+    )
+    session = TestingSessionLocal()
+    yield session
+    
+    session.rollback()
+    session.close()
