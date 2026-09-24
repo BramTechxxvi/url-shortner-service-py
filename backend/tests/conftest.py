@@ -1,8 +1,9 @@
 import pytest
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, delete
 from sqlalchemy.orm import sessionmaker
 from app.config import get_settings
 from app.database import Base
+from app.models.url import ShortUrl
 import app.models
 
 
@@ -23,7 +24,7 @@ def test_engine():
     
 @pytest.fixture()
 def db_session(test_engine):
-    TestingSessionLocal = Sessionmaker(
+    TestingSessionLocal = sessionmaker(
         bind=test_engine,
         autoflush=False,
         autocommit=False,
@@ -33,3 +34,6 @@ def db_session(test_engine):
     
     session.rollback()
     session.close()
+    
+    with test_engine.begin() as connection:
+        connection.execute(delete(ShortUrl))
