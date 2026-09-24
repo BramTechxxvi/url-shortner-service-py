@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from models.url import ShortUrl
+from app.models.url import ShortUrl
 
 
 
