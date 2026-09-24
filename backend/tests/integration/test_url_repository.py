@@ -28,3 +28,10 @@ def test_get_by_short_code_returns_matching_url(db_session):
     
     assert result is not None
     assert result.short_code == "Git123"
+    
+    
+    
+def test_get_by_short_code_returns_none_when_code_does_not_exists(db_session):
+    repository = URLRepository(db_session)
+    result = repository.get_by_short_code("fake321")
+    assert result is None
