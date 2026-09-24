@@ -2,10 +2,11 @@ import pytest
 from sqlalchemy import create_engine, delete
 from sqlalchemy.orm import sessionmaker
 from app.config import get_settings
-from app.database import Base
+from app.database import Base, get_db
 from app.models.url import ShortUrl
 import app.models
-
+from fastapi.testclient import TestClient
+from app.main import app
 
 
 settings = get_settings()
