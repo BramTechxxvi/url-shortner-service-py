@@ -29,11 +29,11 @@ def test_create_short_url_returns_201_and_persists_url(client, db_session,):
     
     
     
-# def test_create_short_url_rejects_invalid_url(client):
-#     response = client.post(
-#         "/api/v1/urls", 
-#         json={
-#             "url": "this-is-a-fake-url"
-#         },
-#     )
-#     assert response.status_code == 422
+def test_create_short_url_rejects_invalid_url(client):
+    response = client.post(
+        "/api/v1/urls", 
+        json={
+            "url": "this-is-a-fake-url"
+        },
+    )
+    assert response.status_code == 422
