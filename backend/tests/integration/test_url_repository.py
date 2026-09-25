@@ -35,3 +35,16 @@ def test_get_by_short_code_returns_none_when_code_does_not_exists(db_session):
     repository = URLRepository(db_session)
     result = repository.get_by_short_code("fake321")
     assert result is None
+    
+    
+    
+
+# def test_increment_click_count_updates_click_record_in_database(db_session):
+#     repository = URLRepository(db_session)
+#     short_url = repository.create(original_url="https://example.com", short_code="Click1")
+    
+#     assert short_url.click_count == 0
+#     repository.increment_click_count(short_url)
+#     assert short_url.click_count == 1
+#     db_session.refresh(short_url)
+#     assert short_url.click_count == 1

@@ -25,3 +25,12 @@ class URLRepository:
         self.db.refresh(short_url)
         
         return short_url
+    
+    
+    
+    def increment_click_count(self, short_url: ShortUrl) -> ShortUrl: 
+        short_url.click_count +=1
+        self.db.commit()
+        self.db.refresh(short_url)
+        
+        return short_url
