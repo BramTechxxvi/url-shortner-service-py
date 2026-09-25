@@ -34,3 +34,14 @@ class URLService:
             "short_url": f"{self.base_url}/{saved_url.short_code}",
             "created_at": saved_url.created_at,
         }
+        
+        
+        
+        
+    def resolve_short_url(self, short_code: str,) -> str|None:
+        existing_url = self.repository.get_by_short_code(short_code)
+        if existing_url is None:
+            return None
+        
+        self.repository.increment_click_count(existing_url)
+        return existing_url.original_url

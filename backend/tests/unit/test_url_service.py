@@ -82,3 +82,47 @@ def test_create_short_url_regenerates_code_when_collision_occurs():
     assert(
         result["short_url"] == "http://localhost:8000/Free201"
     )
+    
+    
+    
+    
+def test_resolve_short_url_returns_original_url_and_increments_clicks():
+    repository = Mock()
+    stored_url = SimpleNamespace(
+        original_url="https://example.com",
+        short_code="Ab12CD",
+        click_count=4
+    )
+    repository.get_by_short_code.return_value = stored_url
+    
+    service = URLService(
+        repository=repository, 
+        code_generator=Mock(),
+        base_url="http://localhost:8000",
+    )
+    result = service.resolve_short_url("Ab12CD")
+    
+    repository.get_by_short_code.assert_called_once_with("Ab12CD")
+    repository.increment_click_count.assert_called_once_with(stored_url)
+    
+    assert result == "https://example.com"
+    
+    
+
+
+def test_resolve_short_url_returns_None_when_code_does_not_exists():
+    repository = Mock()
+    repository.get_short_code.return_value = None
+    
+    service = URLService(
+        repository=repository,
+        code_generator=Mock(),
+        base_url="http://localhost:8000",
+    )
+    result = service.resolve_short_url("Missing")
+    
+    repository.get_by_short_code.assert_called_once_with("Missing")
+    repository.increment_click_count.assert_not_called()
+    
+    assert result is None
+    
