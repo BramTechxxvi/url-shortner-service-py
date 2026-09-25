@@ -38,3 +38,18 @@ def db_session(test_engine):
     
     with test_engine.begin() as connection:
         connection.execute(delete(ShortUrl))
+        
+        
+        
+
+@pytest.fixture()
+def client(db_session):
+    def override_get_db():
+        yield db_session
+        
+    app.dependency_overrides[get_db] = override_get_db
+    
+    with TestClient(app) as test_client:
+        yield test_client
+        
+    app.dependency_overrides.clear()
