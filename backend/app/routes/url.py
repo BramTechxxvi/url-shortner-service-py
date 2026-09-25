@@ -22,5 +22,11 @@ settings = get_settings()
     response_model=URLResponse,
     status_code=status.HTTP_201_CREATED,
 )
-def create_short_url():
-    pass
+def create_short_url(payload: URLCreate, db: Session=(Depends(get_db))):
+    repository = URLRepository(db)
+    service = URLService(
+        repository=repository, 
+        code_generator=generate_short_code,
+        base_url=settings.base_url,
+    )
+    return service.create_short_url(original_url=str(payload.url))
