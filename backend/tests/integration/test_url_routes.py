@@ -11,7 +11,7 @@ def test_create_short_url_returns_201_and_persists_url(client, db_session,):
             "url": "https://example.com/articles/42"
         },
     )
-    assert response.status_code == 200
+    assert response.status_code == 201
     data = response.json()
     
     assert data["original_url"] == "https://example.com/articles/42"
