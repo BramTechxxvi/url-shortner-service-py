@@ -11,7 +11,7 @@ from app.utils.short_code import generate_short_code
 
 
 router = APIRouter(
-    prefix="api/v1/urls",
+    prefix="/api/v1/urls",
     tags=["URLS"],
 )
 
