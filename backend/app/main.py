@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from database import get_db
+from app.database import get_db
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
