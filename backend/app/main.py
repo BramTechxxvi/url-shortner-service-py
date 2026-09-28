@@ -3,6 +3,7 @@ from app.database import get_db
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from app.routes.url import router as url_router
+from app.routes.redirect import router as redirect_router
 
 
 
@@ -14,6 +15,8 @@ app = FastAPI(
 )
 
 app.include_router(url_router)
+app.include_router(redirect_router)
+
 
 @app.get("/health")
 def health_check():
