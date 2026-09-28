@@ -1,6 +1,10 @@
 from sqlalchemy import select
 from app.models.url import ShortUrl
 from app.repositories.url_repository import URLRepository
+from datetime import timedelta, timezone, datetime
+
+
+
 
 
 
@@ -48,3 +52,17 @@ def test_increment_click_count_updates_click_record_in_database(db_session):
     assert short_url.click_count == 1
     db_session.refresh(short_url)
     assert short_url.click_count == 1
+    
+    
+    
+    
+def test_create_persist_expiry_data(db_session):
+    repository = URLRepository(db_session)
+    expires_at = datetime.now(timezone.utc) + timedelta(days=9)
+    short_url=repository.create(
+        original_url="https://example.com",
+        short_code="ninedays",
+        expires_at=expires_at
+    )
+    db_session.refresh(short_url)
+    assert short_url.expires_at == expires_at

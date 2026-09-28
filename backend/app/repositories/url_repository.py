@@ -18,8 +18,8 @@ class URLRepository:
     
     
     
-    def create(self, original_url: str, short_code: str) -> ShortUrl:
-        short_url = ShortUrl(original_url=original_url, short_code=short_code)
+    def create(self, original_url: str, short_code: str, expires_at=None) -> ShortUrl:
+        short_url = ShortUrl(original_url=original_url, short_code=short_code, expires_at=expires_at)
         self.db.add(short_url)
         self.db.commit()
         self.db.refresh(short_url)
