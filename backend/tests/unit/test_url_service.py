@@ -92,7 +92,7 @@ def test_resolve_short_url_returns_original_url_and_increments_clicks():
     stored_url = SimpleNamespace(
         original_url="https://example.com",
         short_code="Ab12CD",
-        click_count=4
+        click_count=4,
         expires_at=None
     )
     repository.get_by_short_code.return_value = stored_url
@@ -149,3 +149,21 @@ def test_resolve_short_url_raises_error_when_url_is_expired():
         service.resolve_short_url("Old12345")
         
     repository.increment_click_count.assert_not_called()
+    
+    
+    
+    
+    
+
+def test_resolve_url_redirects_when_expiry_is_in_future():
+    repository = Mock()
+    stored_url = SimpleNamespace(
+        original_url="https://example.com",
+        short_code="Future",
+        click_count=0,
+        expires_at=datetime.now(timezone.utc) + timedelta(days=1),
+    )
+    repository.get_by_short_code.return_value = stored_url
+    
+    service= URLService(repository=repository, base_url="http://localhost:8000")
+    result = service.resolve_short_url("Future")
