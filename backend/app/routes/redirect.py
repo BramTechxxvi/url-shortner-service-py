@@ -17,7 +17,7 @@ settings = get_settings()
 
 @router.get("/{short_code}")
 def redirect_short_url(short_code: str, db: Session=Depends(get_db)):
-    repository = URLRepository(get_db)
+    repository = URLRepository(db)
     service = URLService(
         repository=repository,
         code_generator=generate_short_code,
@@ -26,6 +26,6 @@ def redirect_short_url(short_code: str, db: Session=Depends(get_db)):
     original_url = service.resolve_short_url(short_code)
     
     if original_url is None:
-        raise HTTPException(status_code=404, detail="Short URL not found.")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Short URL not found.")
     
     return RedirectResponse(url=original_url, status_code=status.HTTP_302_FOUND)
