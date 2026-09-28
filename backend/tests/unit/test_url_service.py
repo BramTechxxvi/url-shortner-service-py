@@ -112,7 +112,7 @@ def test_resolve_short_url_returns_original_url_and_increments_clicks():
 
 def test_resolve_short_url_returns_None_when_code_does_not_exists():
     repository = Mock()
-    repository.get_short_code.return_value = None
+    repository.get_by_short_code.return_value = None
     
     service = URLService(
         repository=repository,

@@ -38,7 +38,7 @@ class URLService:
         
         
         
-    def resolve_short_url(self, short_code: str,) -> str|None:
+    def resolve_short_url(self, short_code: str,) -> str | None:
         existing_url = self.repository.get_by_short_code(short_code)
         if existing_url is None:
             return None
