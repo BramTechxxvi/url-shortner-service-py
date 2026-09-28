@@ -15,7 +15,8 @@ def test_create_short_url_generates_code_and_persists_url():
     repository.create.return_value = SimpleNamespace(
         original_url="https://example.com",
         short_code="Ab12CD",
-        created_at=created_at
+        created_at=created_at,
+        expires_at=None
     )
     code_generator = Mock(return_value="Ab12CD")
     
@@ -33,6 +34,7 @@ def test_create_short_url_generates_code_and_persists_url():
     repository.create.assert_called_once_with(
         original_url="https://example.com",
         short_code="Ab12CD",
+        expires_at=None
     )
     
     assert result["original_url"] == "https://example.com"
@@ -55,6 +57,7 @@ def test_create_short_url_regenerates_code_when_collision_occurs():
         original_url="https://example.com",
         short_code="Free201",
         created_at=created_at,
+        expires_at=None
     )
     code_generator = Mock(
         side_effect=["Taken1", "Free201"]
@@ -77,6 +80,7 @@ def test_create_short_url_regenerates_code_when_collision_occurs():
     repository.create.assert_called_once_with(
         original_url="https://example.com",
         short_code="Free201",
+        expires_at=None
     )
     
     assert result["short_code"] == "Free201"
