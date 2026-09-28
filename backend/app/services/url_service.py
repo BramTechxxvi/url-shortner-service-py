@@ -23,7 +23,7 @@ class URLService:
         
         
     
-    def create_short_url(self, original_url: str) -> dict:
+    def create_short_url(self, original_url: str, expires_at: datetime |None=None) -> dict:
         while True:
             short_code = self.code_generator()
             existing_url = self.repository.get_by_short_code(short_code)
@@ -34,6 +34,7 @@ class URLService:
         saved_url = self.repository.create(
             original_url=original_url,
             short_code=short_code,
+            expires_at=expires_at
         )
         
         return {
@@ -41,6 +42,7 @@ class URLService:
             "short_code": saved_url.short_code,
             "short_url": f"{self.base_url}/{saved_url.short_code}",
             "created_at": saved_url.created_at,
+            "expires_at": saved_url.expires_at,
         }
         
         
