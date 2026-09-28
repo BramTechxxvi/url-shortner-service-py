@@ -1,5 +1,6 @@
 from sqlalchemy import select
 from app.models.url import ShortUrl
+from datetime import datetime, timedelta, timezone
 
 
 
@@ -74,3 +75,19 @@ def test_short_url_redirects_increments_click_count(client, db_session):
 def test_missing_short_code_returns_404(client):
     response = client.get("/DoesNotExist", follow_redirects=False)
     assert response.status_code == 404
+    
+    
+    
+    
+
+def test_expired_short_url_returns_410(client, db_session):
+    short_url = ShortUrl(
+        original_url="https://example.com",
+        short_code="Expired",
+        expires_at=(datetime.now(timezone.utc) - timedelta(days=1))
+    )
+    db_session.add(short_url)
+    db_session.commit()
+    
+    response = client.get("/Expired", follow_redirects=False)
+    assert response.status_code ==410
