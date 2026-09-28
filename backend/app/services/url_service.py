@@ -1,4 +1,6 @@
 from collections.abc import Callable
+from app.utils.short_code import generate_short_code
+
 
 
 
@@ -6,12 +8,13 @@ class URLService:
     def __init__(
         self,
         repository,
-        code_generator: Callable[[], str],
         base_url: str,
+        code_generator: Callable[[], str] = generate_short_code,
     ):
         self.repository = repository
-        self.code_generator = code_generator
         self.base_url = base_url.rstrip("/")
+        self.code_generator = code_generator
+
         
         
     
