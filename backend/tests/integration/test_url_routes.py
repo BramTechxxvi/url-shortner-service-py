@@ -37,3 +37,40 @@ def test_create_short_url_rejects_invalid_url(client):
         },
     )
     assert response.status_code == 422
+    
+    
+    
+    
+def test_short_url_redirects_to_original_url(client, db_session):
+    short_url = ShortUrl(original_url="https://example.com", short_code="GO12345")
+    db_session.add(short_url)
+    db_session.commit()
+    
+    response = client.get("/GO12345", follow_redirects=False)
+    assert response.status_code == 302
+    assert response.headers["location"] == "https://example.com"
+    
+    
+
+
+def test_short_url_redirects_increments_click_count(client, db_session):
+    short_url = ShortUrl(original_url="https://example.com", short_code="Count1")
+    db_session.add(short_url)
+    db_session.commit()
+    db_session.refresh(short_url)
+    
+    
+    assert short_url.click_count == 0
+    response = client.get("/Count1", follow_redirects=False)
+    assert response.status_code == 302
+    
+    db_session.refresh(short_url)
+    assert short_url.click_count == 1
+    
+    
+    
+    
+    
+def test_missing_short_code_returns_404(client):
+    response = client.get("/DoesNotExist", follow_redirects=False)
+    assert response.status_code == 404
