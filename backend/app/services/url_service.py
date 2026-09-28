@@ -4,6 +4,11 @@ from app.utils.short_code import generate_short_code
 
 
 
+
+class URLExpiredError(Exception):
+    pass
+
+
 class URLService:
     def __init__(
         self,

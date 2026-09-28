@@ -1,7 +1,8 @@
 from datetime import datetime, timezone, timedelta
 from types import SimpleNamespace
 from unittest.mock import Mock, call
-from app.services.url_service import URLService
+from app.services.url_service import URLService, URLExpiredError
+import pytest
 
 
 
@@ -126,3 +127,24 @@ def test_resolve_short_url_returns_None_when_code_does_not_exists():
     
     assert result is None
     
+    
+    
+    
+    
+    
+def test_resolve_short_url_raises_error_when_url_is_expired():
+    repository = Mock()
+    expired_url = SimpleNamespace(
+        original_url="https://example.com",
+        short_code="Old12345",
+        click_count=0,
+        expires_at=datetime.now(timezone.utc) - timedelta(days=1)
+    )
+    repository.get_by_short_code.return_value =expired_url
+    
+    
+    service = URLService(repository=repository, base_url="http:localhost:8000")
+    with pytest.raises(URLExpiredError):
+        service.resolve_short_url("Old12345")
+        
+    repository.increment_click_count.assert_not_called()
