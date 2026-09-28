@@ -1,6 +1,6 @@
 from collections.abc import Callable
 from app.utils.short_code import generate_short_code
-
+from datetime import datetime, timezone
 
 
 
@@ -50,6 +50,9 @@ class URLService:
         existing_url = self.repository.get_by_short_code(short_code)
         if existing_url is None:
             return None
+        
+        if existing_url.expires_at is not None and existing_url.expires_at <=datetime.now(timezone.utc):
+            raise URLExpiredError
         
         self.repository.increment_click_count(existing_url)
         return existing_url.original_url

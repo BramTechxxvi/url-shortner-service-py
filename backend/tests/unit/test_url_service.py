@@ -93,6 +93,7 @@ def test_resolve_short_url_returns_original_url_and_increments_clicks():
         original_url="https://example.com",
         short_code="Ab12CD",
         click_count=4
+        expires_at=None
     )
     repository.get_by_short_code.return_value = stored_url
     
