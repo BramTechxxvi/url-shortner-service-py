@@ -119,4 +119,11 @@ def test_creat_short_url_rejects_expiry_time_in_the_past(client):
     
     
     
-    
+
+def test_create_short_url_allows_no_expiry(client):
+    response = client.post(
+        "/api/v1/urls",
+        json= { "url": "https://example.com"}
+    )
+    assert response.status_code == 201
+    assert response.json()["expires_at"] is None
