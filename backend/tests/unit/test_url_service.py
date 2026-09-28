@@ -167,3 +167,39 @@ def test_resolve_url_redirects_when_expiry_is_in_future():
     
     service= URLService(repository=repository, base_url="http://localhost:8000")
     result = service.resolve_short_url("Future")
+    
+    
+    
+    
+    
+
+def test_create_short_url_persists_custom_expiry():
+    repository= Mock()
+    repository.get_by_short_code.return_value = None
+    
+    expires_at = datetime.now(timezone.utc) + timedelta(days=2)
+    created_at = datetime.now(timezone.utc)
+    repository.create.return_value = SimpleNamespace(
+        original_url="https://example.com",
+        short_code="Expire123",
+        created_at=created_at,
+        expires_at=expires_at,
+    )
+    code_generator = Mock(return_value="Expire123")
+    
+    service = URLService(
+        repository=repository,
+        code_generator=code_generator,
+        base_url="http://localhost:8000"
+    )
+    result = service.create_short_url(
+        original_url="https://example.com",
+        expires_at=expires_at
+    )
+    repository.assert_called_once_with(
+        original_url="https:example.com",
+        short_code="Expire123",
+        expires_at=expires_at
+    )
+    
+    assert result["expires_at"] == expires_at
