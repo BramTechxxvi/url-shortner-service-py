@@ -200,8 +200,8 @@ def test_create_short_url_persists_custom_expiry():
         original_url="https://example.com",
         expires_at=expires_at
     )
-    repository.assert_called_once_with(
-        original_url="https:example.com",
+    repository.create.assert_called_once_with(
+        original_url="https://example.com",
         short_code="Expire123",
         expires_at=expires_at
     )
