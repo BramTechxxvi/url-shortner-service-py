@@ -110,12 +110,12 @@ def test_create_short_url_accepts_future_expiry(client):
     
     
 
-# def test_creat_short_url_rejects_expiry_time_in_the_past(client):
-#     response = client.post(
-#         "/api/v1/urls",
-#         json= { "url": "https://example.com", "expires_at": "2008-01-01T00:00:00Z"}
-#     )
-#     assert response.status_code == 422
+def test_creat_short_url_rejects_expiry_time_in_the_past(client):
+    response = client.post(
+        "/api/v1/urls",
+        json= { "url": "https://example.com", "expires_at": "2008-01-01T00:00:00Z"}
+    )
+    assert response.status_code == 422
     
     
     
