@@ -5,7 +5,7 @@ import type { CreateShortUrlRequest, ShorturlResponse } from "../types/url";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 
-export async function createShortUel(
+export async function createShortUrl(
     payload:CreateShortUrlRequest): Promise<ShorturlResponse> {
         const response = await fetch(
             `${API_BASE_URL}/api/v1/urls`,
@@ -20,3 +20,4 @@ export async function createShortUel(
         }
     return response.json()
 }
+
