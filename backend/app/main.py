@@ -14,8 +14,6 @@ app = FastAPI(
     version="1.0.0",
 )
 
-app.include_router(url_router)
-app.include_router(redirect_router)
 
 
 @app.get("/health")
@@ -34,3 +32,7 @@ def database_health_check(db: Session = Depends(get_db)):
         "status": "ok",
         "database": "connected successfully"
     }    
+    
+    
+app.include_router(url_router)
+app.include_router(redirect_router)
