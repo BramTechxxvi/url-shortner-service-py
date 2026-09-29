@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from app.database import get_db
 from sqlalchemy import text
 from sqlalchemy.orm import Session
@@ -14,6 +15,14 @@ app = FastAPI(
     version="1.0.0",
 )
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[],
+    allow_credentials="",
+    allow_methods= [],
+    allow_headers=["Content-Type"]
+)
 
 
 @app.get("/health")
