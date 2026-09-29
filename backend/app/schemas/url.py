@@ -29,3 +29,4 @@ class URLResponse(BaseModel):
     short_code: str
     short_url: str
     created_at: datetime
+    expires_at: datetime | None

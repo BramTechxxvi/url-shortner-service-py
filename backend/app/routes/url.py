@@ -29,4 +29,7 @@ def create_short_url(payload: URLCreate, db: Session=(Depends(get_db))):
         code_generator=generate_short_code,
         base_url=settings.base_url,
     )
-    return service.create_short_url(original_url=str(payload.url))
+    return service.create_short_url(
+        original_url=str(payload.url),
+        expires_at=payload.expires_at,
+    )
