@@ -16,7 +16,7 @@ export async function createShortUrl(
             },
         )
         if (!response.ok) {
-            throw new Error("Unable to reach shorten URL")
+            throw new Error("Unable to shorten URL")
         }
     return response.json()
 }
