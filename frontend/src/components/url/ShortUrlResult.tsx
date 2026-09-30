@@ -5,13 +5,13 @@ import type { ShorturlResponse } from '../../types/url'
 
 
 
-interface ShorturlResponseProps {
+interface ShorturlResultProps {
     result: ShorturlResponse
 }
 
-export function ShorturlResponse({
+export function ShortUrlResult({
     result,
-}: ShorturlResponseProps) {
+}: ShorturlResultProps) {
     const [copied, setCopied] = useState(false)
 
     async function handleCopy() {
