@@ -1,3 +1,10 @@
+import { CheckCircle2, Clock3, ShieldCheck, } from "lucide-react"
+import { Header } from "./components/layout/Header"
+import { Footer } from "./components/layout/Footer"
+
+
+
+
 
 
 function App() {
