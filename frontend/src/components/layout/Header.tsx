@@ -20,8 +20,12 @@ export function Header() {
                 href="https://github.com/BramTechxxvi"
                 target="blank"
                 rel="noreferrer"
-                className='flex min-h-11 items-center gap2'>
-                <GithubIcon/>
+                className='flex min-h-11 items-center gap2 rounded-xl px-3 text-sm font-medium text-slate-600
+                            transition hover:bg-slate-100 hover:text-slate-950'>
+                <span>
+                    <GithubIcon/>
+                </span>
+                
             </a>
         </div>
     </header>
