@@ -16,7 +16,17 @@ export async function createShortUrl(
             },
         )
         if (!response.ok) {
-            throw new Error("Unable to shorten URL")
+            let message = "Unable to shorten URL"
+            try {
+                const errorData = await response.json()
+
+                if (typeof errorData.detail === 'string') {
+                    message = errorData.detail
+                }
+            } catch {
+                throw new Error("Unable to shorten URL")
+            }
+            throw new Error(message)
         }
     return response.json()
 }
