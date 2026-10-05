@@ -1,5 +1,5 @@
 import { ArrowRight, Link2, LoaderCircle } from 'lucide-react'
-import { type FormEvent, useState } from 'react'
+import { type SubmitEvent, useState } from 'react'
 import { ShortUrlResult } from './ShortUrlResult'
 import type { ShorturlResponse } from '../../types/url'
 import { createShortUrl } from '../../services/urlService'
@@ -11,15 +11,15 @@ import { ExpirySelector } from './ExpirySelector'
 
 export function UrlShortenerForm() {
     const [url, setUrl] = useState('')
-    const [expiry, setExpiry] = useState<ExpiryOption>('never')
+    const [expiryOption, setExpiryOption] = useState<ExpiryOption>('never')
 
-    const [customDate, setCustomDate] = useState('')
+    const [expiryAmount, setExpiryAmount] = useState(1)
     const [result, setResult] = useState<ShorturlResponse| null>(null)
     const [error, setError] = useState<string |null>(null)
     const [isLoading, setIsLoading] = useState(false)
 
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
         setError(null)
         setResult(null)
@@ -28,11 +28,7 @@ export function UrlShortenerForm() {
             setError("Enter a URL to shorten")
             return
         }
-        if (expiry === "custom" && !customDate) {
-            setError("Choose a custom expiration date")
-            return
-        }
-
+     
         try {
             new URL(url)
         }catch {
@@ -40,9 +36,15 @@ export function UrlShortenerForm() {
             return
         }
 
+        if(expiryOption !== 'never' && 
+            !Number.isFinite(expiryAmount || expiryAmount <= 0)) {
+                setError("Expiration duration must be greater than zero.")
+                return
+            }
+
         try {
             setIsLoading(true)
-            const expiresAt = getExpiryDate(expiry, customDate)
+            const expiresAt = getExpiryDate(expiryOption, expiryAmount)
             const data = await createShortUrl({url, expires_at: expiresAt})
             
             setResult(data)
@@ -97,10 +99,10 @@ export function UrlShortenerForm() {
 
                     <div className='grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end'>
                         <ExpirySelector 
-                        value={expiry}
-                        customDate={customDate}
-                        onChange={setExpiry}
-                        onCustomDateChange={setCustomDate} 
+                        option={expiryOption}
+                        amount={expiryAmount}
+                        onOptionChange={setExpiryOption}
+                        onAmountChange={setExpiryAmount} 
                         />
 
                         <button
