@@ -88,8 +88,44 @@ function App() {
                   <span className="h-2 w-2 rounded-full bg-emerald-500" />
                   Fast, simple and reliable
                 </div>
+
+                <h1 className="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl md:text-6xl lg:text-7xl">
+                  Short links.
+            
+                  <span className="block text-slate-500">
+                    Big possibilities.
+                  </span>
+                </h1>
+
+                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+                  Turn long, messy URLs into clean and sharable links in seconds.
+                  Choose when they expire and share them anywhere.
+                </p>
               </div>
 
+              <div className="mx-auto mt-8 max-w-3xl sm:mt-10">
+                <UrlShortenerForm />
+              </div>
+
+              <div className="mx-auto mt-5 grid max-w-3xl gap-3 sm:grid-cols-3 lg:hidden">
+                <Feature
+                  icon={<CheckCircle2 size={18} />}
+                  title="No signup"
+                  description="Shorten instantly"
+                />
+
+                <Feature
+                  icon={<Clock3 size={18} />}
+                  title="Custom expiry"
+                  description="Control link lifetime"
+                />
+
+                <Feature
+                  icon={<ShieldCheck size={18} />}
+                  title="Validated"
+                  description="Safe URL handling"
+                />
+              </div>
 
             </div>
         </section>
