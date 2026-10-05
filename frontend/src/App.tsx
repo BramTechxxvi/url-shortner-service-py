@@ -110,36 +110,3 @@ export default App
 
 
 
-
-
-
-so for the expiry i like the idea of where they can select a option but let's make it broad, how about they select if to be active for some hours or days so they select hours or days then the number as well 
-And ALSO IN UrlShortenerForm FOrmEvent is deprciated
-
-                    <div className='grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end'>
-                        <ExpirySelector 
-                        value={expiry}
-                        customDate={customDate}
-                        onChange={setExpiry}
-                        onCustomDateChange={setCustomDate} 
-                        />
-
-                        <button
-                        type="submit"
-                        disabled={isLoading}
-                        className='inline-flex min-h-12 items-center justify-center gap-2 rounded-xl 
-                        bg-slate-950 px-6 font-semibold text-white transition hover:bg-slate-800
-                        disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-44'
-                        >
-                            {isLoading ? (
-                                <>
-                                    <LoaderCircle 
-                                    size={18}
-                                    className='animate-spin'
-                                    />
-type 'Dispatch<SetStateAction<ExpiryOption>>' is not assignable to type '(value: string) => void'.
-  Types of parameters 'value' and 'value' are incompatible.
-    Type 'string' is not assignable to type 'SetStateAction<ExpiryOption>'.ts(2322)
-ExpirySelector.tsx(10, 5): The
-
-

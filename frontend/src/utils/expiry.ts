@@ -1,46 +1,29 @@
 export type ExpiryOption =
 | "never"
-| "1-hour"
-| "1-day"
-| "7-days"
-| "30-days"
-| "custom"
+| "hours"
+| "days"
 
 
 export function getExpiryDate(
     option: ExpiryOption,
-    customDate?: string,
+    amount?: number,
 ): string | null {
     if (option === "never") {
         return null
     }
-    if (option === "custom") {
-        if(!customDate) {
-            return null
-        }
 
-        return new Date(customDate).toISOString()
-
+    if (!Number.isFinite(amount) || amount <= 0) {
+        throw new Error("Expiration duration must be greater thn zero")
     }
 
-    const now = new Date()
+    const expiryDate = new Date()
 
-    switch(option) {
-        case "1-hour":
-            now.setHours(now.getHours() + 1)
-            break
+    if(option === 'hours') {
+        expiryDate.setHours(expiryDate.getHours() + amount)
+    }
+    if (option === 'days') {
+        expiryDate.setDate(expiryDate.getDay() + amount)
+    }
     
-        case "1-day":
-            now.setDate(now.getDate() + 1)
-            break
-        
-        case "7-days":
-            now.setDate(now.getDate() +7)
-            break
-            
-        case "30-days":
-            now.setDate(now.getDate() +30)
-            break
-    }
-    return now.toISOString()
+    return expiryDate.toISOString()
 }
