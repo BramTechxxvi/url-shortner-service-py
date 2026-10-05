@@ -47,7 +47,7 @@ function App() {
     <div className="min-h-screen bg-slate-50 text-slate-950">
       <Header />
 
-      <main>
+      <main className='flex-1'>
         <section className="relative overflow-hidden">
           <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 
           bg-gradient-to-b from-indigo-50 via-slate-50 to-transparent" 
