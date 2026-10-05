@@ -9,7 +9,7 @@ __pycache__/
 
 # Environment variables
 .env
-.env*
+.env
 
 # IDE
 .vscode/
@@ -20,5 +20,49 @@ __pycache__/
 .coverage
 
 # OS
+.DS_Store
+Thumbs.db
+
+#==================
+# BACKEND/PYTHON
+#==================
+backend/.venv/
+backend/venv/
+
+__pycache__/
+*.py[cod]
+*.pyo
+
+backend/.env
+
+.pytest_cache
+.coverage
+htmlcov/
+
+
+# =========================
+# Frontend / Node
+# =========================
+
+frontend/node_modules/
+frontend/dist/
+
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+
+# =========================
+# IDE
+# =========================
+
+.vscode/
+.idea/
+
+
+# =========================
+# OS
+# =========================
+
 .DS_Store
 Thumbs.db
