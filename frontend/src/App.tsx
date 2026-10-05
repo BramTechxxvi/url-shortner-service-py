@@ -20,7 +20,21 @@ function Feature({
   description
 }: FeatureProps) {
   return(
-    <div></div>
+
+    <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-4">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
+        {icon}
+      </span>
+
+      <div className="min-w-0">
+        <p className="text-sm font-semibold text-slate-900">
+          {title}
+        </p>
+        <p className="text-xs text-slate-500">
+          {description}
+        </p>
+      </div>
+    </div>
   )
 }
 
