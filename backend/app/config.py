@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     app_env: str= "development"
     database_url: str
     base_url: str= "http://localhost:8000"
-    test_database_url: str
+    test_database_url: str | None = None
     frontend_url: str="http://localhost:5173"
     
     model_config = SettingsConfigDict(
