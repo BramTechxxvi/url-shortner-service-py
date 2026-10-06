@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     
     @property
     def allowed_origins(self)-> list[str]:
+        if self.app_env == "production":
+            return[self.frontend_url]
+        
         return list(
             dict.fromkeys(
                 [
