@@ -22,7 +22,7 @@ function Feature({
 }: FeatureProps) {
   return(
 
-    <div className="flex min-w-44 items-center gap-3 rounded-2xl border border-slate-200/80 bg-white px-4 py-3
+    <div className="flex w-44 items-center gap-3 rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3
     shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:shadow-md"
     >
       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
@@ -46,7 +46,7 @@ function Feature({
 function App() {
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-950">
+    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-950">
       <Header />
 
       <main className='flex-1'>
@@ -56,7 +56,7 @@ function App() {
           />
             <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-18 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12">
 
-              <div className="absolute left-4 top-[36%] hidden lg:block xl:left-10">
+              <div className="absolute left-4 top-[36%] hidden xl:block xl:left-10">
                 <Feature 
                   icon={<CheckCircle2 size={18}/>}
                   title="No signup"
@@ -64,7 +64,7 @@ function App() {
                 />
               </div>
 
-              <div className="absolute left-4 top-[64%] hidden lg:block xl:left-10">
+              <div className="absolute left-4 top-[64%] hidden xl:block xl:left-10">
                 <Feature
                   icon={<Zap size={18}/>}
                   title="Instant"
@@ -72,7 +72,7 @@ function App() {
                 />
               </div>
 
-              <div className='absolute right-4 top-[36%] hidden lg:block xl:right-10'>
+              <div className='absolute right-4 top-[36%] hidden xl:block xl:right-10'>
                 <Feature 
                   icon={<Clock3 size={18}/>}
                   title="Custom expiry"
@@ -80,7 +80,7 @@ function App() {
                 />
               </div>
 
-              <div className='absolute right-4 top-[64%] hidden lg:block xl:right-10'>
+              <div className='absolute right-4 top-[64%] hidden xl:block xl:right-10'>
                 <Feature 
                   icon={<ShieldCheck size={18}/>}
                   title="Validated"
@@ -106,7 +106,7 @@ function App() {
                 </h1>
 
                 <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-                  Turn long, messy URLs into clean and sharable links in seconds.
+                  Turn long, messy URLs into clean and shareable links in seconds.
                   Choose when they expire and share them anywhere.
                 </p>
               </div>
