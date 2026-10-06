@@ -56,11 +56,19 @@ function App() {
           />
             <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-18 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12">
 
-              <div className="absolute left-4 top-[46%] hidden -translate-y-1/2 lg:block xl:left-10">
+              <div className="absolute left-4 top-[36%] hidden lg:block xl:left-10">
                 <Feature 
                   icon={<CheckCircle2 size={18}/>}
                   title="No signup"
                   description="No account required"
+                />
+              </div>
+
+              <div className="absolute left-4 top-[64%] hidden lg:block xl:left-10">
+                <Feature
+                  icon={<Zap size={18}/>}
+                  title="Instant"
+                  description="Links ready in seconds"
                 />
               </div>
 
