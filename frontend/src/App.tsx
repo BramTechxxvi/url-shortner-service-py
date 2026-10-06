@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { CheckCircle2, Clock3, ShieldCheck, } from "lucide-react"
+import { CheckCircle2, Clock3, ShieldCheck, Zap} from "lucide-react"
 import { Header } from "./components/layout/Header"
 import { Footer } from "./components/layout/Footer"
 import { UrlShortenerForm } from "./components/url/UrlShortenerForm"
@@ -60,7 +60,7 @@ function App() {
                 <Feature 
                   icon={<CheckCircle2 size={18}/>}
                   title="No signup"
-                  description="Shorten instantly"
+                  description="No account required"
                 />
               </div>
 
@@ -107,11 +107,17 @@ function App() {
                 <UrlShortenerForm />
               </div>
 
-              <div className="mx-auto mt-5 grid max-w-3xl gap-3 sm:grid-cols-3 lg:hidden">
+              <div className="mx-auto mt-5 grid max-w-3xl gap-3 sm:grid-cols-2 lg:hidden">
                 <Feature
                   icon={<CheckCircle2 size={18} />}
                   title="No signup"
-                  description="Shorten instantly"
+                  description="No account required"
+                />
+
+                <Feature
+                icon={<Zap size={18}/>}
+                title="Instant"
+                description="Links ready in seconds"
                 />
 
                 <Feature
